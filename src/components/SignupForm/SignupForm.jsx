@@ -22,8 +22,12 @@ const SignupForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    updateMessage('');
-    console.log(formData); // this line will print the form data to the console
+    try {
+        props.setUser(formData) // this will modify the state in the App component
+        navigate('/') // upon redirect you will see the "Dashboard" page
+      } catch (err) {
+        updateMessage(err.message)
+      }
   };
 
   const { username, password, passwordConf } = formData;
